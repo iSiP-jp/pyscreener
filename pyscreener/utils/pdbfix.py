@@ -8,7 +8,7 @@ from openmm.app import PDBFile
 
 
 def pdbfix(
-    receptor: Optional[str] = None, pdbid: Optional[str] = None, pH: float = 7.0, path: str = "."
+    receptor: Optional[str] = None, pdbid: Optional[str] = None, pH: float = 7.0, path: str = ".", keepWater: bool = False
 ) -> str:
     """fix the input PDB file or ID
 
@@ -38,7 +38,7 @@ def pdbfix(
     fixer.findMissingResidues()
     fixer.findNonstandardResidues()
     fixer.replaceNonstandardResidues()
-    fixer.removeHeterogens(keepWater=False)
+    fixer.removeHeterogens(keepWater=keepWater)
     fixer.findMissingAtoms()
     fixer.addMissingAtoms()
     fixer.addMissingHydrogens(pH)
@@ -54,5 +54,5 @@ def pdbfix(
     return outfile
 
 
-def get_pdb(pdbid: str, pH: float = 7.0, path: str = ".") -> str:
-    return pdbfix(None, pdbid, pH, path)
+def get_pdb(pdbid: str, pH: float = 7.0, path: str = ".", keepWater: bool = False) -> str:
+    return pdbfix(None, pdbid, pH, path, keepWater)

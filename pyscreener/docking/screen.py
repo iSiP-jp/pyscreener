@@ -38,6 +38,7 @@ class DockingVirtualScreen:
         receptor_reduction: Union[Reduction, str] = Reduction.BEST,
         k: int = 1,
         verbose: int = 0,
+        keepWater: bool = False
     ):
         self.runner = runner
         self.runner.validate_metadata(metadata_template)
@@ -47,6 +48,7 @@ class DockingVirtualScreen:
         self.metadata = metadata_template
         self.base_name = base_name
         self.path = path
+        self.keepWater = keepWater
 
         self.score_mode = (
             reduction if isinstance(reduction, Reduction) else Reduction.from_str(reduction)
@@ -62,7 +64,7 @@ class DockingVirtualScreen:
         self.receptors = receptors or []
         if pdbids is not None:
             self.receptors = list(self.receptors)
-            self.receptors.extend([pdbfix.get_pdb(pdbid, path=self.path) for pdbid in pdbids])
+            self.receptors.extend([pdbfix.get_pdb(pdbid, path=self.path, keepWater=self.keepWater) for pdbid in pdbids])
 
         if self.center is None:
             if docked_ligand_file is None:
