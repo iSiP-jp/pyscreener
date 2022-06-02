@@ -40,6 +40,7 @@ class DockingVirtualScreen:
         repeats: int = 1,
         k: int = 1,
         verbose: int = 0,
+        keepWater: bool = False
     ):
         # super().__init__()
         self.runner = runner
@@ -50,6 +51,7 @@ class DockingVirtualScreen:
         self.metadata = metadata_template
         self.base_name = base_name
         self.path = path
+        self.keepWater = keepWater
 
         self.score_mode = (
             score_mode if isinstance(score_mode, ScoreMode) else ScoreMode.from_str(score_mode)
@@ -71,7 +73,7 @@ class DockingVirtualScreen:
         self.receptors = receptors or []
         if pdbids is not None:
             self.receptors = list(self.receptors)
-            self.receptors.extend([pdbfix.get_pdb(pdbid, path=self.path) for pdbid in pdbids])
+            self.receptors.extend([pdbfix.get_pdb(pdbid, path=self.path, keepWater=self.keepWater) for pdbid in pdbids])
 
         if self.center is None:
             if docked_ligand_file is None:
