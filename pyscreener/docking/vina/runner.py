@@ -250,24 +250,80 @@ class VinaRunner(DockingRunner):
         out = path / f"{software.value}_{name}_out.pdbqt"
         log = path / f"{software.value}_{name}.log"
 
-        argv = [
-            software.value,
-            f"--receptor={receptor}",
-            f"--ligand={ligand}",
-            f"--center_x={center[0]}",
-            f"--center_y={center[1]}",
-            f"--center_z={center[2]}",
-            f"--size_x={size[0]}",
-            f"--size_y={size[1]}",
-            f"--size_z={size[2]}",
-            f"--cpu={ncpu}",
-            f"--out={out}",
-            f"--log={log}",
-            f"--exhaustiveness={exhaustiveness}",
-            f"--num_modes={num_modes}",
-            f"--energy_range={energy_range}",
-            *extra,
-        ]
+        if software.value == 'qvina':
+            argv = [
+                software.value,
+                f"--receptor={receptor}",
+                f"--ligand={ligand}",
+                f"--center_x={center[0]}",
+                f"--center_y={center[1]}",
+                f"--center_z={center[2]}",
+                f"--size_x={size[0]}",
+                f"--size_y={size[1]}",
+                f"--size_z={size[2]}",
+                f"--cpu={ncpu}",
+                f"--out={out}",
+                f"--log={log}",
+                f"--exhaustiveness={exhaustiveness}",
+                f"--num_modes={num_modes}",
+                f"--energy_range={energy_range}",
+                *extra,
+            ]
+        elif software.value == 'vina':
+            argv = [
+                software.value,
+                f"--receptor={receptor}",
+                f"--ligand={ligand}",
+                f"--center_x={center[0]}",
+                f"--center_y={center[1]}",
+                f"--center_z={center[2]}",
+                f"--size_x={size[0]}",
+                f"--size_y={size[1]}",
+                f"--size_z={size[2]}",
+                f"--cpu={ncpu}",
+                f"--out={out}",
+                f"--exhaustiveness={exhaustiveness}",
+                f"--num_modes={num_modes}",
+                f"--energy_range={energy_range}",
+                *extra,
+            ]
+        elif software.value == 'smina':
+            argv = [
+                software.value,
+                f"--receptor={receptor}",
+                f"--ligand={ligand}",
+                f"--center_x={center[0]}",
+                f"--center_y={center[1]}",
+                f"--center_z={center[2]}",
+                f"--size_x={size[0]}",
+                f"--size_y={size[1]}",
+                f"--size_z={size[2]}",
+                f"--cpu={ncpu}",
+                f"--out={out}",
+                f"--log={log}",
+                f"--exhaustiveness={exhaustiveness}",
+                f"--num_modes={num_modes}",
+                *extra,
+            ]
+        else:
+            argv = [
+                software.value,
+                f"--receptor={receptor}",
+                f"--ligand={ligand}",
+                f"--center_x={center[0]}",
+                f"--center_y={center[1]}",
+                f"--center_z={center[2]}",
+                f"--size_x={size[0]}",
+                f"--size_y={size[1]}",
+                f"--size_z={size[2]}",
+                f"--cpu={ncpu}",
+                f"--out={out}",
+                f"--log={log}",
+                f"--exhaustiveness={exhaustiveness}",
+                f"--num_modes={num_modes}",
+                f"--energy_range={energy_range}",
+                *extra,
+            ]
 
         return argv, out, log
 
