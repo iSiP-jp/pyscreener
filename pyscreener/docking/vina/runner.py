@@ -175,7 +175,7 @@ class VinaRunner(DockingRunner):
         except sp.SubprocessError:
             print(f'ERROR: docking failed. Message: {ret.stderr.decode("utf-8")}', file=sys.stderr)
 
-        if software.value in ['qvina', 'smina']:
+        if data.metadata.software.value in ['qvina', 'smina']:
             scores = VinaRunner.parse_logfile(log)
         else:
             scores = VinaRunner.parse_outfile(out)
